@@ -14,12 +14,15 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
             overflow: hidden;
             width: 100vw;
             height: 100vh;
             background: #000;
+            font-family: 'Segoe UI', sans-serif;
         }
+        
         .screen {
             width: 100vw;
             height: 100vh;
@@ -28,86 +31,140 @@
             left: 0;
             opacity: 0;
             visibility: hidden;
-            transition: opacity .2s ease, visibility .2s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
+        
         .screen.active {
             opacity: 1;
             visibility: visible;
         }
+        
+        /* ===== PAGE 1: PASSWORD SCREEN ===== */
         .screen-bg {
-            background: linear-gradient(135deg,#141E30 0%,#243B55 50%,#0F2027 100%);
+            background: linear-gradient(135deg, #141E30 0%, #243B55 50%, #0F2027 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 0 20px;
+            padding: 20px 0 30px;
             height: 100vh;
         }
+        
         .page-header {
             width: 100%;
             text-align: center;
-            padding: 55px 0;
+            padding: 50px 0 30px;
         }
+        
         .header-text {
             font-family: 'Arial Black', sans-serif;
             font-size: 2.5rem;
             font-weight: 900;
             color: #5D4037;
             text-shadow: 2px 2px 0 rgba(255,255,255,0.7), 4px 4px 0 rgba(0,0,0,0.2);
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
+        
+        .sub-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #8B4513;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+            margin-top: 10px;
+        }
+        
         .image-container {
             width: 85%;
             max-width: 1000px;
-            height: 75vh;
-            margin: -100px auto 10px;
+            height: 60vh;
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: -50px auto 20px;
+            position: relative;
+            overflow: hidden;
         }
+        
         .page-image {
             width: 100%;
             height: 100%;
             object-fit: contain;
             border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
+        
         .password-section {
             width: 100%;
             display: flex;
-            justify-content: center;
-            margin-top: -110px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px 0;
+            margin-top: -80px;
         }
+        
         .password-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
             width: 100%;
             max-width: 420px;
             padding: 0 20px;
         }
+        
         .error-message {
             color: #ff6b6b;
             background: rgba(0,0,0,0.7);
             padding: 12px 25px;
             border-radius: 30px;
-            text-align: center;
-            margin-bottom: 5px;
+            font-size: 15px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,107,107,0.3);
             display: none;
+            width: 100%;
+            text-align: center;
         }
+        
         .password-box {
             background: rgba(255,255,255,0.15);
             padding: 25px 30px;
             border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2), inset 0 1px 20px rgba(255,255,255,0.15);
+            border: 1.5px solid rgba(255,255,255,0.3);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
             backdrop-filter: blur(25px);
         }
+        
         .input-container {
             position: relative;
             width: 100%;
-            margin-bottom: 20px;
         }
+        
         .password-input {
             width: 100%;
             padding: 18px 50px 18px 25px;
             font-size: 17px;
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 14px;
+            outline: none;
             background: rgba(255,255,255,0.15);
             color: white;
+            transition: all 0.2s ease;
         }
+        
+        .password-input:focus {
+            border-color: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 0 25px rgba(255,255,255,0.3);
+        }
+        
         .input-icon {
             position: absolute;
             right: 20px;
@@ -115,24 +172,56 @@
             transform: translateY(-50%);
             color: rgba(255,255,255,0.8);
             font-size: 20px;
+            pointer-events: none;
         }
+        
         .submit-btn {
-            background: linear-gradient(135deg,rgba(33,150,243,0.8) 0%,rgba(21,101,192,0.8) 100%);
+            background: linear-gradient(135deg, rgba(33,150,243,0.9) 0%, rgba(21,101,192,0.9) 100%);
             color: white;
-            border: none;
+            border: 1.5px solid rgba(255,255,255,0.3);
             padding: 18px 30px;
             font-size: 17px;
             border-radius: 14px;
             cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
             width: 100%;
+            backdrop-filter: blur(10px);
         }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(21,101,192,1) 100%);
+            transform: scale(1.02);
+        }
+        
+        /* ===== PAGE 2: MAIN INTERFACE - 8 BUTTONS ===== */
         .main-interface {
-            background: linear-gradient(135deg,#2c3e50 0%,#34495e 100%);
+            background: linear-gradient(135deg, #1e2a3a 0%, #2c3e50 100%);
             display: flex;
             flex-direction: column;
             height: 100vh;
+            overflow: hidden;
         }
+        
+        #mainInterface .page-header {
+            padding: 60px 0 20px;
+            margin-bottom: 0;
+        }
+        
+        #mainInterface .header-text {
+            color: #FF9800;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+            font-size: 2.2rem;
+        }
+        
+        #mainInterface .sub-header {
+            color: #F57C00;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+        
         .sections-overlay {
+            width: 100%;
             flex: 1;
             display: flex;
             justify-content: center;
@@ -140,79 +229,126 @@
             padding: 20px;
             overflow-y: auto;
         }
+        
         .columns-container {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             justify-content: center;
-            max-width: 1400px;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
             flex-wrap: wrap;
         }
+        
         .column {
-            flex: 0 1 450px;
+            flex: 0 1 400px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 25px;
         }
+        
         .section-btn {
-            background: rgba(255,253,245,0.85);
+            background: rgba(255, 255, 255, 0.95);
             border: none;
-            border-radius: 18px;
-            padding: 25px 10px;
-            font-size: 22px;
-            font-weight: 700;
-            color: #5D4037;
+            border-radius: 20px;
+            padding: 30px 20px;
+            font-size: 28px;
+            font-weight: 800;
+            color: #2c3e50;
             cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+            border: 2px solid rgba(255,255,255,0.5);
             width: 100%;
             text-align: center;
-            backdrop-filter: blur(15px);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
+        
         .section-btn:hover {
-            background: rgba(255,253,245,0.95);
-            transform: translateY(-8px) scale(1.04);
+            background: white;
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.4);
+            border-color: #FF9800;
+            color: #000;
         }
+        
+        .section-btn:active {
+            transform: translateY(-5px) scale(1.02);
+        }
+        
         .global-copyright {
             position: fixed;
-            bottom: 10px;
+            bottom: 15px;
             left: 0;
             width: 100%;
             text-align: center;
-            color: rgba(255,255,255,0.6);
-            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            font-weight: 500;
             z-index: 9999;
+            pointer-events: none;
+            letter-spacing: 1px;
         }
-        #mainInterface .header-text {
-            color: #FF9800;
+        
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            10%,30%,50%,70%,90% { transform: translateX(-6px); }
+            20%,40%,60%,80% { transform: translateX(6px); }
         }
+        
+        @media (max-width: 768px) {
+            .header-text { font-size: 2rem; }
+            .image-container { height: 50vh; margin-top: -30px; }
+            .column { flex: 0 1 100%; }
+            .section-btn { padding: 25px 15px; font-size: 24px; }
+            .columns-container { gap: 20px; }
+            .password-section { margin-top: -60px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header-text { font-size: 1.8rem; }
+            .section-btn { padding: 20px 10px; font-size: 22px; }
+            .page-header { padding: 40px 0 20px; }
+        }
+        
+        ::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body>
-    <!-- PASSWORD SCREEN -->
+    <!-- ===== PAGE 1: PASSWORD SCREEN ===== -->
     <div id="combinedScreen" class="screen screen-bg active">
         <div class="page-header">
-            <div class="header-text"></div>
+            <div class="header-text">LFJC</div>
+            <div class="sub-header">Examination Portal</div>
         </div>
+        
         <div class="image-container">
-            <img src="https://i.ibb.co/MDKxfWzQ/1234.png" alt="LFJC Image" class="page-image">
+            <img src="https://i.ibb.co/MDKxfWzQ/1234.png" alt="LFJC" class="page-image">
         </div>
+        
         <div class="password-section">
             <div class="password-container">
                 <div id="errorMessage" class="error-message"></div>
                 <div class="password-box">
                     <div class="input-container">
-                        <input type="password" id="passwordInput" class="password-input" placeholder="Enter access code">
+                        <input type="password" id="passwordInput" class="password-input" placeholder="Enter access code" autocomplete="off">
                         <span class="input-icon">🔒</span>
                     </div>
-                    <button id="submitBtn" class="submit-btn">submit</button>
+                    <button id="submitBtn" class="submit-btn">Submit</button>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- MAIN INTERFACE - BUTTONS -->
+    <!-- ===== PAGE 2: MAIN INTERFACE - 8 BUTTONS ===== -->
     <div id="mainInterface" class="screen main-interface">
         <div class="page-header">
             <div class="header-text">LFJC ONLINE EXAMINATION</div>
+            <div class="sub-header">Select Your Section</div>
         </div>
+        
         <div class="sections-overlay">
             <div class="columns-container">
                 <div class="column">
@@ -241,21 +377,31 @@
         const errorMsg = document.getElementById('errorMessage');
         const mainInterface = document.getElementById('mainInterface');
         
-        // ===== PASSWORD CHECK =====
+        // ===== PASSWORD VERIFICATION =====
         function checkPassword() {
             const password = passwordInput.value.trim();
             
             if (password === 'lfjc2025') {
+                // Switch to main interface
                 combinedScreen.classList.remove('active');
                 mainInterface.classList.add('active');
                 passwordInput.value = '';
+                errorMsg.style.display = 'none';
             } else {
-                errorMsg.textContent = 'Incorrect password';
+                // Show error
+                errorMsg.textContent = 'Incorrect password. Please try again.';
                 errorMsg.style.display = 'block';
                 passwordInput.value = '';
+                
+                // Shake effect
+                const box = document.querySelector('.password-box');
+                box.style.animation = 'shake 0.5s';
+                setTimeout(() => box.style.animation = '', 500);
+                
+                // Hide error after 3 seconds
                 setTimeout(() => {
                     errorMsg.style.display = 'none';
-                }, 2000);
+                }, 3000);
             }
         }
         
@@ -264,7 +410,7 @@
             if (e.key === 'Enter') checkPassword();
         });
         
-        // ===== 🔥 HIDDEN URLS - BASE64 ENCODED =====
+        // ===== 🔥 HIDDEN URLS - BASE64 ENCODED (NO REAL URLS VISIBLE) =====
         const ENCODED_URLS = [
             'aHR0cHM6Ly8xZC1hbmEucGFnZXMuZGV2', // 1D
             'aHR0cHM6Ly8xbS02cTMucGFnZXMuZGV2', // 1M
@@ -276,17 +422,25 @@
             'aHR0cHM6Ly8yZS0ybTMucGFnZXMuZGV2'  // 2E
         ];
         
-        // ===== BUTTON CLICK - OPENS IN NEW TAB =====
+        // ===== BUTTON CLICK HANDLER - OPEN IN NEW TAB =====
         const buttons = document.querySelectorAll('.section-btn');
         buttons.forEach((btn, index) => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Decode Base64 to get real URL
                 const realUrl = atob(ENCODED_URLS[index]);
+                // Open in new tab
                 window.open(realUrl, '_blank');
             });
         });
         
-        // ===== AUTO FOCUS PASSWORD =====
+        // ===== AUTO FOCUS PASSWORD FIELD =====
         window.addEventListener('load', function() {
+            passwordInput.focus();
+        });
+        
+        // ===== CLICK ON SCREEN TO FOCUS PASSWORD =====
+        combinedScreen.addEventListener('click', function() {
             passwordInput.focus();
         });
     </script>
