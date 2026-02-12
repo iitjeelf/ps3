@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFJC</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- ========== BLOCK view-source: IMMEDIATELY ========== -->
+    <script>
+        (function() {
+            if (window.location.protocol === 'view-source:' || 
+                window.location.href.indexOf('view-source:') > -1 ||
+                window.location.href.indexOf('View-source:') > -1 ||
+                window.location.href.indexOf('VIEW-SOURCE:') > -1) {
+                window.location.replace('about:blank');
+                document.open();
+                document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
+                document.close();
+                window.stop();
+                throw new Error('View source blocked');
+            }
+        })();
+    </script>
+    
+    <style>
+        /* EXACT ORIGINAL STYLES - KEPT IDENTICAL */
+        *{margin:0;padding:0;box-sizing:border-box}body{overflow:hidden;width:100vw;height:100vh;background:#000;-webkit-tap-highlight-color:transparent}.screen{width:100vw;height:100vh;position:fixed;top:0;left:0;opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}.screen.active{opacity:1;visibility:visible}.screen-bg{background:linear-gradient(135deg,#141E30 0%,#243B55 50%,#0F2027 100%);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:10px 0 20px;height:100vh}.page-header{width:100%;text-align:center;padding:55px 0;z-index:10;flex-shrink:0}.header-text{font-family:'Arial Black',sans-serif;font-size:2.5rem;font-weight:900;color:#5D4037;text-shadow:2px 2px 0 rgba(255,255,255,0.7),4px 4px 0 rgba(0,0,0,0.2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}.sub-header{font-family:'Segoe UI',sans-serif;font-size:1.2rem;font-weight:600;color:#8B4513;text-shadow:1px 1px 0 rgba(255,255,255,0.5)}.image-container{width:85%;max-width:1000px;height:75vh;min-height:300px;display:flex;justify-content:center;align-items:center;margin:-100px auto 10px;flex-shrink:0;position:relative;overflow:hidden}.page-image{width:100%;height:100%;object-fit:contain;border-radius:15px;box-shadow:0 15px 40px rgba(0,0,0,0.4);display:block}.combined-screen{z-index:1000}.password-section{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:10px 0;flex-shrink:0;min-height:120px;margin-top:-110px;position:relative}.password-container{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%;max-width:420px;padding:0 20px}.error-message{color:#ff6b6b;background:rgba(0,0,0,0.7);padding:12px 25px;border-radius:30px;font-family:'Segoe UI',sans-serif;font-size:15px;font-weight:500;backdrop-filter:blur(10px);border:1px solid rgba(255,107,107,0.3);display:none;width:100%;text-align:center;margin-bottom:5px}.password-box{background:rgba(255,255,255,0.15);padding:25px 30px;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,0.3),0 0 0 1px rgba(255,255,255,0.2),inset 0 1px 20px rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);width:100%;display:flex;flex-direction:column;gap:20px;backdrop-filter:blur(25px)}.input-container{position:relative;width:100%}.password-input{width:100%;padding:18px 50px 18px 25px;font-size:17px;border:2px solid rgba(255,255,255,0.3);border-radius:14px;outline:none;background:rgba(255,255,255,0.15);color:white;transition:all .2s ease;font-family:-apple-system,sans-serif}.password-input:focus{border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.25);box-shadow:0 0 25px rgba(255,255,255,0.3)}.input-icon{position:absolute;right:20px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.8);font-size:20px;pointer-events:none}.submit-btn{background:linear-gradient(135deg,rgba(33,150,243,0.8) 0%,rgba(21,101,192,0.8) 100%);color:white;border:1.5px solid rgba(255,255,255,0.3);padding:18px 30px;font-size:17px;border-radius:14px;cursor:pointer;font-weight:600;transition:all .2s ease;font-family:-apple-system,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,0.25);width:100%;backdrop-filter:blur(10px)}.main-interface{z-index:800;background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%);display:flex;flex-direction:column;height:100vh}.sections-overlay{width:100%;flex:1;display:flex;justify-content:center;align-items:center;padding:10px;overflow-y:auto}.columns-container{display:flex;gap:30px;justify-content:center;width:100%;max-width:1400px;padding:20px;flex-wrap:wrap}.column{flex:0 1 450px;display:flex;flex-direction:column;gap:15px;min-height:500px}.section-btn{background:rgba(255,253,245,0.85);border:none;border-radius:18px;padding:25px 10px;font-size:22px;font-weight:700;color:#5D4037;cursor:pointer;transition:all .3s ease;box-shadow:0 12px 40px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.3);backdrop-filter:blur(15px);border:2px solid rgba(255,253,245,0.3);width:100%;text-align:center}.section-btn:hover{background:rgba(255,253,245,0.95);transform:translateY(-8px) scale(1.04);box-shadow:0 20px 50px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.5);border-color:rgba(255,253,245,0.6);color:#000}.web-frame{background:#000;z-index:2000;display:flex}.web-frame iframe{width:100%;height:100%;border:none;background:#000}.close-frame{position:absolute;top:20px;right:20px;background:rgba(0,0,0,0.8);color:white;border:none;width:55px;height:55px;border-radius:50%;font-size:26px;cursor:pointer;z-index:2001;display:flex;justify-content:center;align-items:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3)}.global-copyright{position:fixed;bottom:10px;left:0;width:100%;text-align:center;color:rgba(255,255,255,0.6);font-size:12px;font-family:'Segoe UI',sans-serif;z-index:9999;pointer-events:none}@keyframes shake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-6px)}20%,40%,60%,80%{transform:translateX(6px)}}@media (max-width:768px){.header-text{font-size:2rem}.image-container{height:60vh}.column{max-width:350px}.section-btn{padding:22px 8px;font-size:20px}}::-webkit-scrollbar{display:none}body{-ms-overflow-style:none;scrollbar-width:none;-webkit-user-select:none;user-select:none}#mainInterface .header-text{color:#FF9800;text-shadow:none}#mainInterface .sub-header{color:#F57C00;text-shadow:none}#mainInterface .page-header{padding-bottom:0;margin-bottom:-70px}#mainInterface .sections-overlay{margin-top:-60px;padding-top:0}
+    </style>
+</head>
+<body>
+    <!-- ========== COMBINED SCREEN WITH YOUR IMAGE AND PASSWORD ========== -->
+    <div id="combinedScreen" class="combined-screen screen-bg screen active">
+        <div class="page-header">
+            <div class="header-text"></div>
+            <div class="sub-header"></div>
+        </div>
+        
+        <!-- ========== YOUR IMAGE FROM i.ibb.co ========== -->
+        <div class="image-container">
+            <img src="https://i.ibb.co/MDKxfWzQ/1234.png" 
+                 alt="LFJC Image" 
+                 class="page-image"
+                 onerror="this.style.display='none'">
+        </div>
+        
+        <!-- ========== PASSWORD SECTION ========== -->
+        <div class="password-section">
+            <div class="password-container">
+                <div id="errorMessage" class="error-message"></div>
+                <div class="password-box">
+                    <div class="input-container">
+                        <input type="password" id="passwordInput" class="password-input" placeholder="Enter access code" autocomplete="off">
+                        <span class="input-icon">🔒</span>
+                    </div>
+                    <button id="submitBtn" class="submit-btn">submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== MAIN INTERFACE - NO DATA ATTRIBUTES, NO PATHS ========== -->
+    <div id="mainInterface" class="main-interface screen">
+        <div class="page-header">
+            <div class="header-text">LFJC ONLINE EXAMINATION</div>
+            <div class="sub-header"></div>
+        </div>
+        <div class="sections-overlay">
+            <div class="columns-container">
+                <div class="column">
+                    <button class="section-btn">1D</button>
+                    <button class="section-btn">1M</button>
+                    <button class="section-btn">1N</button>
+                    <button class="section-btn">1E</button>
+                </div>
+                <div class="column">
+                    <button class="section-btn">2D</button>
+                    <button class="section-btn">2M</button>
+                    <button class="section-btn">2N</button>
+                    <button class="section-btn">2E</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ========== WEB FRAME - SIMPLE IFRAME, NO SANDBOX ========== -->
+    <div id="webFrame" class="web-frame screen">
+        <button class="close-frame" id="closeFrame">✕</button>
+        <iframe id="contentFrame" style="width:100%; height:100%; border:none; background:#000;"></iframe>
+    </div>
+
+    <!-- ========== GLOBAL COPYRIGHT ========== -->
+    <div class="global-copyright">© LFJC 2026 All Rights Reserved</div>
+
+    <script>
+        // ========== DOM ELEMENTS ==========
+        const combinedScreen = document.getElementById('combinedScreen');
+        const passwordInput = document.getElementById('passwordInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMsg = document.getElementById('errorMessage');
+        const mainInterface = document.getElementById('mainInterface');
+        const webFrame = document.getElementById('webFrame');
+        const contentFrame = document.getElementById('contentFrame');
+        const closeFrameBtn = document.getElementById('closeFrame');
+        
+        let currentState = 'combined';
+        
+        // ========== DEV TOOLS DETECTION ==========
+        (function() {
+            function killPage() {
+                try {
+                    document.querySelectorAll('iframe').forEach(iframe => {
+                        iframe.src = 'about:blank';
+                        iframe.remove();
+                    });
+                    document.head.innerHTML = '';
+                    document.body.innerHTML = '';
+                    document.open();
+                    document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
+                    document.close();
+                    window.stop();
+                    window.location.replace('about:blank');
+                } catch(e) {}
+            }
+            
+            function detect() {
+                if (window.outerWidth - window.innerWidth > 80 || 
+                    window.outerHeight - window.innerHeight > 80) {
+                    killPage();
+                }
+            }
+            
+            setInterval(detect, 10);
+            window.addEventListener('resize', detect);
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || e.keyCode === 123 || 
+                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                    (e.ctrlKey && e.key === 'u')) {
+                    e.preventDefault();
+                    killPage();
+                }
+            }, true);
+            
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            }, true);
+        })();
+        
+        // ========== PASSWORD CHECK ==========
+        async function checkPassword() {
+            const password = passwordInput.value.trim();
+            
+            errorMsg.style.display = 'none';
+            
+            if (!password) {
+                errorMsg.textContent = 'Please enter a password';
+                errorMsg.style.display = 'block';
+                shakeBox();
+                return;
+            }
+            
+            if (password === 'lfjc2025') {
+                combinedScreen.classList.remove('active');
+                mainInterface.classList.add('active');
+                passwordInput.value = '';
+                currentState = 'sections';
+            } else {
+                errorMsg.textContent = 'Incorrect password. Please try again.';
+                errorMsg.style.display = 'block';
+                passwordInput.value = '';
+                shakeBox();
+                passwordInput.focus();
+            }
+        }
+        
+        // ========== EVENT LISTENERS ==========
+        submitBtn.addEventListener('click', checkPassword);
+        
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // ========== CLOSE FRAME ==========
+        closeFrameBtn.addEventListener('click', function() {
+            contentFrame.src = 'about:blank';
+            webFrame.classList.remove('active');
+            combinedScreen.classList.add('active');
+            currentState = 'combined';
+            passwordInput.value = '';
+            passwordInput.focus();
+        });
+        
+        // ========== SECTION BUTTONS - NO PATHS, ONLY INDEX! ==========
+        const buttons = document.querySelectorAll('.section-btn');
+        buttons.forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                // Set iframe src to generic endpoint with index
+                contentFrame.src = '/go?i=' + index;
+                
+                mainInterface.classList.remove('active');
+                webFrame.classList.add('active');
+                currentState = 'iframe';
+            });
+        });
+        
+        // ========== ESCAPE KEY ==========
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (currentState === 'sections') {
+                    mainInterface.classList.remove('active');
+                    combinedScreen.classList.add('active');
+                    currentState = 'combined';
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                } else if (currentState === 'iframe') {
+                    contentFrame.src = 'about:blank';
+                    webFrame.classList.remove('active');
+                    combinedScreen.classList.add('active');
+                    currentState = 'combined';
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            }
+        });
+        
+        // ========== UTILITY FUNCTIONS ==========
+        function shakeBox() {
+            const box = document.querySelector('.password-box');
+            if (box) {
+                box.style.animation = 'shake 0.5s';
+                setTimeout(() => { box.style.animation = ''; }, 500);
+            }
+        }
+        
+        function forceFocus() {
+            setTimeout(() => {
+                passwordInput.focus();
+            }, 100);
+        }
+        
+        function goFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            }
+        }
+        
+        window.addEventListener('load', function() {
+            passwordInput.value = '';
+            errorMsg.style.display = 'none';
+            goFullscreen();
+            forceFocus();
+        });
+        
+        document.addEventListener('click', function() {
+            if (currentState === 'combined') {
+                forceFocus();
+                goFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
