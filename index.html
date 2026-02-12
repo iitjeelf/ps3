@@ -11,16 +11,20 @@
     <!-- ========== BLOCK view-source: IMMEDIATELY ========== -->
     <script>
         (function() {
+            // DETECT view-source: AND KILL INSTANTLY
             if (window.location.protocol === 'view-source:' || 
                 window.location.href.indexOf('view-source:') > -1 ||
                 window.location.href.indexOf('View-source:') > -1 ||
                 window.location.href.indexOf('VIEW-SOURCE:') > -1) {
                 
+                // COMPLETE BLANK PAGE - NOTHING VISIBLE
                 window.location.replace('about:blank');
                 document.open();
                 document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
                 document.close();
                 window.stop();
+                
+                // KILL EVERYTHING
                 throw new Error('View source blocked');
             }
         })();
@@ -108,19 +112,58 @@
         
         let currentState = 'combined';
         
-       // ========== SIMPLE PROTECTION - NO FALSE POSITIVES ==========
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-});
-
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'F12' || 
-        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-        (e.ctrlKey && e.key === 'u')) {
-        e.preventDefault();
-    }
-});
+        // ========== DEV TOOLS DETECTION - FIXED FOR CLOUDFLARE ==========
+        (function() {
+            function killPage() {
+                try {
+                    document.querySelectorAll('iframe').forEach(iframe => {
+                        iframe.src = 'about:blank';
+                        iframe.remove();
+                    });
+                    document.head.innerHTML = '';
+                    document.body.innerHTML = '';
+                    document.open();
+                    document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
+                    document.close();
+                    window.stop();
+                    window.location.replace('about:blank');
+                } catch(e) {}
+            }
+            
+            function detect() {
+                // IGNORE Cloudflare Pages - DON'T KILL!
+                if (window.location.hostname.includes('pages.dev') || 
+                    window.location.hostname.includes('cloudflare')) {
+                    return; // SAFE - no kill on Cloudflare
+                }
+                
+                // ONLY kill if Dev Tools is DEFINITELY open
+                if (window.outerWidth - window.innerWidth > 200 || 
+                    window.outerHeight - window.innerHeight > 200) {
+                    killPage();
+                }
+            }
+            
+            // Check LESS frequently - every 2 seconds
+            setInterval(detect, 2000);
+            window.addEventListener('resize', detect);
+            
+            // Block keyboard shortcuts but DON'T kill page
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || e.keyCode === 123 || 
+                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                    (e.ctrlKey && e.key === 'u')) {
+                    e.preventDefault();
+                    // DON'T killPage() - just prevent
+                }
+            }, true);
+            
+            // Block right click
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            }, true);
+        })();
         
         // ========== PASSWORD CHECK ==========
         async function checkPassword() {
