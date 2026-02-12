@@ -7,43 +7,529 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- ========== BLOCK view-source: IMMEDIATELY ========== -->
-    <script>
-        (function() {
-            // DETECT view-source: AND KILL INSTANTLY
-            if (window.location.protocol === 'view-source:' || 
-                window.location.href.indexOf('view-source:') > -1 ||
-                window.location.href.indexOf('View-source:') > -1 ||
-                window.location.href.indexOf('VIEW-SOURCE:') > -1) {
-                
-                // COMPLETE BLANK PAGE - NOTHING VISIBLE
-                window.location.replace('about:blank');
-                document.open();
-                document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
-                document.close();
-                window.stop();
-                
-                // KILL EVERYTHING
-                throw new Error('View source blocked');
-            }
-        })();
-    </script>
-    
     <style>
-        /* EXACT ORIGINAL STYLES - KEPT IDENTICAL */
-        *{margin:0;padding:0;box-sizing:border-box}body{overflow:hidden;width:100vw;height:100vh;background:#000;-webkit-tap-highlight-color:transparent}.screen{width:100vw;height:100vh;position:fixed;top:0;left:0;opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}.screen.active{opacity:1;visibility:visible}.screen-bg{background:linear-gradient(135deg,#141E30 0%,#243B55 50%,#0F2027 100%);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:10px 0 20px;height:100vh}.page-header{width:100%;text-align:center;padding:55px 0;z-index:10;flex-shrink:0}.header-text{font-family:'Arial Black',sans-serif;font-size:2.5rem;font-weight:900;color:#5D4037;text-shadow:2px 2px 0 rgba(255,255,255,0.7),4px 4px 0 rgba(0,0,0,0.2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}.sub-header{font-family:'Segoe UI',sans-serif;font-size:1.2rem;font-weight:600;color:#8B4513;text-shadow:1px 1px 0 rgba(255,255,255,0.5)}.image-container{width:85%;max-width:1000px;height:75vh;min-height:300px;display:flex;justify-content:center;align-items:center;margin:-100px auto 10px;flex-shrink:0;position:relative;overflow:hidden}.page-image{width:100%;height:100%;object-fit:contain;border-radius:15px;box-shadow:0 15px 40px rgba(0,0,0,0.4);display:block}.combined-screen{z-index:1000}.password-section{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:10px 0;flex-shrink:0;min-height:120px;margin-top:-110px;position:relative}.password-container{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%;max-width:420px;padding:0 20px}.error-message{color:#ff6b6b;background:rgba(0,0,0,0.7);padding:12px 25px;border-radius:30px;font-family:'Segoe UI',sans-serif;font-size:15px;font-weight:500;backdrop-filter:blur(10px);border:1px solid rgba(255,107,107,0.3);display:none;width:100%;text-align:center;margin-bottom:5px}.password-box{background:rgba(255,255,255,0.15);padding:25px 30px;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,0.3),0 0 0 1px rgba(255,255,255,0.2),inset 0 1px 20px rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);width:100%;display:flex;flex-direction:column;gap:20px;backdrop-filter:blur(25px)}.input-container{position:relative;width:100%}.password-input{width:100%;padding:18px 50px 18px 25px;font-size:17px;border:2px solid rgba(255,255,255,0.3);border-radius:14px;outline:none;background:rgba(255,255,255,0.15);color:white;transition:all .2s ease;font-family:-apple-system,sans-serif}.password-input:focus{border-color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.25);box-shadow:0 0 25px rgba(255,255,255,0.3)}.input-icon{position:absolute;right:20px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.8);font-size:20px;pointer-events:none}.submit-btn{background:linear-gradient(135deg,rgba(33,150,243,0.8) 0%,rgba(21,101,192,0.8) 100%);color:white;border:1.5px solid rgba(255,255,255,0.3);padding:18px 30px;font-size:17px;border-radius:14px;cursor:pointer;font-weight:600;transition:all .2s ease;font-family:-apple-system,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,0.25);width:100%;backdrop-filter:blur(10px)}.main-interface{z-index:800;background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%);display:flex;flex-direction:column;height:100vh}.sections-overlay{width:100%;flex:1;display:flex;justify-content:center;align-items:center;padding:10px;overflow-y:auto}.columns-container{display:flex;gap:30px;justify-content:center;width:100%;max-width:1400px;padding:20px;flex-wrap:wrap}.column{flex:0 1 450px;display:flex;flex-direction:column;gap:15px;min-height:500px}.section-btn{background:rgba(255,253,245,0.85);border:none;border-radius:18px;padding:25px 10px;font-size:22px;font-weight:700;color:#5D4037;cursor:pointer;transition:all .3s ease;box-shadow:0 12px 40px rgba(0,0,0,0.2),inset 0 1px 0 rgba(255,255,255,0.3);backdrop-filter:blur(15px);border:2px solid rgba(255,253,245,0.3);width:100%;text-align:center}.section-btn:hover{background:rgba(255,253,245,0.95);transform:translateY(-8px) scale(1.04);box-shadow:0 20px 50px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.5);border-color:rgba(255,253,245,0.6);color:#000}.web-frame{background:#000;z-index:2000;display:flex;position:fixed;top:0;left:0;right:0;bottom:0;visibility:hidden}.web-frame.active{visibility:visible}.web-frame iframe{width:100%;height:100%;border:none;background:#000;display:block;position:absolute;top:0;left:0;right:0;bottom:0}.close-frame{position:absolute;top:20px;right:20px;background:rgba(0,0,0,0.8);color:white;border:none;width:55px;height:55px;border-radius:50%;font-size:26px;cursor:pointer;z-index:2001;display:flex;justify-content:center;align-items:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3)}.global-copyright{position:fixed;bottom:10px;left:0;width:100%;text-align:center;color:rgba(255,255,255,0.6);font-size:12px;font-family:'Segoe UI',sans-serif;z-index:9999;pointer-events:none}@keyframes shake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-6px)}20%,40%,60%,80%{transform:translateX(6px)}}@media (max-width:768px){.header-text{font-size:2rem}.image-container{height:60vh}.column{max-width:350px}.section-btn{padding:22px 8px;font-size:20px}}::-webkit-scrollbar{display:none}body{-ms-overflow-style:none;scrollbar-width:none;-webkit-user-select:none;user-select:none}#mainInterface .header-text{color:#FF9800;text-shadow:none}#mainInterface .sub-header{color:#F57C00;text-shadow:none}#mainInterface .page-header{padding-bottom:0;margin-bottom:-70px}#mainInterface .sections-overlay{margin-top:-60px;padding-top:0}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* INSTANT TRANSITIONS - NO DELAYS */
+        .screen {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+        
+        .screen.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* COMMON STYLES FOR ALL SCREENS */
+        .screen-bg {
+          background: linear-gradient(135deg, #141E30 0%, #243B55 50%, #0F2027 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0 20px;
+            height: 100vh;
+        }
+        
+        /* Header for ALL screens */
+        .page-header {
+            width: 100%;
+            text-align: center;
+            padding: 55px 0;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+        
+        .header-text {
+            font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #5D4037;
+            text-shadow: 
+                2px 2px 0 rgba(255, 255, 255, 0.7),
+                4px 4px 0 rgba(0, 0, 0, 0.2);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .sub-header {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #8B4513;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Image container - SAME AS FIRST CODE */
+        .image-container {
+            width: 85%;
+            max-width: 1000px;
+            height: 75vh;
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: -100px auto 10px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            display: block;
+        }
+        
+        /* Combined Screen - Image + Password */
+        .combined-screen {
+            z-index: 1000;
+        }
+        
+        /* Password Section - BELOW IMAGE */
+        .password-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 10px 0;
+            flex-shrink: 0;
+            min-height: 120px;
+             margin-top: -110px;
+            position: relative;
+        }
+        
+        .password-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 420px;
+            padding: 0 20px;
+        }
+        
+        /* GLASSY Password Box */
+        .password-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px 30px;
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 1px 20px rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+        }
+        
+        .input-container {
+            position: relative;
+            width: 100%;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 18px 50px 18px 25px;
+            font-size: 17px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transition: all 0.2s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .password-input:focus {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 20px;
+            pointer-events: none;
+        }
+        
+ .submit-btn {
+    background: linear-gradient(135deg, 
+        rgba(33, 150, 243, 0.8) 0%, 
+        rgba(21, 101, 192, 0.8) 100%);
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    padding: 18px 30px;
+    font-size: 17px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, 
+        rgba(33, 150, 243, 0.9) 0%, 
+        rgba(21, 101, 192, 0.9) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+        /* Main Interface - SECTIONS */
+        .main-interface {
+            z-index: 800;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        
+        .sections-overlay {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        
+        .columns-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            width: 100%;
+            max-width: 1400px;
+            padding: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .column {
+            flex: 0 1 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: space-evenly;
+            min-height: 500px;
+        }
+        
+        /* Section Buttons - SOLID BACKGROUND */
+        .section-btn {
+            background: rgba(255, 253, 245, 0.85);
+            border: none;
+            border-radius: 18px;
+            padding: 25px 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #5D4037;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 253, 245, 0.3);
+            width: 100%;
+            text-align: center;
+            display: block;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+        }
+        
+        .section-btn:hover {
+            background: rgba(255, 253, 245, 0.95);
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 253, 245, 0.6);
+            color: #000000;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
+        }
+        
+        .column:nth-child(1) .section-btn {
+            border-right: 4px solid rgba(76, 175, 80, 0.4);
+        }
+        
+        .column:nth-child(2) .section-btn {
+            border-right: 4px solid rgba(33, 150, 243, 0.4);
+        }
+        
+        /* Web Frame */
+        .web-frame {
+            background: #000;
+            z-index: 2000;
+            display: flex;
+        }
+        
+        .web-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
+        }
+        
+        .close-frame {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 26px;
+            cursor: pointer;
+            z-index: 2001;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            font-family: Arial, sans-serif;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .close-frame:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+        
+        /* Copyright */
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 10px;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+            20%, 40%, 60%, 80% { transform: translateX(6px); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-text {
+                font-size: 2rem;
+            }
+            
+            .sub-header {
+                font-size: 1rem;
+            }
+            
+            .image-container {
+                width: 90%;
+                height: 60vh;
+            }
+            
+            .columns-container {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+                padding: 15px;
+            }
+            
+            .column {
+                max-width: 350px;
+                gap: 12px;
+                min-height: auto;
+            }
+            
+            .section-btn {
+                padding: 22px 8px;
+                font-size: 20px;
+            }
+            
+            .password-container {
+                max-width: 350px;
+                padding: 0 15px;
+            }
+            
+            .password-box {
+                padding: 22px 26px;
+            }
+            
+            .password-input {
+                padding: 16px 45px 16px 22px;
+                font-size: 16px;
+            }
+            
+            .submit-btn {
+                padding: 16px 26px;
+                font-size: 16px;
+            }
+            
+            .copyright {
+                font-size: 10px;
+                bottom: 5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-text {
+                font-size: 1.6rem;
+            }
+            
+            .sub-header {
+                font-size: 0.9rem;
+            }
+            
+            .image-container {
+                width: 95%;
+                height: 55vh;
+            }
+            
+            .section-btn {
+                padding: 20px 6px;
+                font-size: 18px;
+            }
+            
+            .password-container {
+                max-width: 320px;
+            }
+            
+            .password-box {
+                padding: 20px 24px;
+                gap: 18px;
+            }
+            
+            .password-input {
+                padding: 14px 40px 14px 20px;
+                font-size: 15px;
+            }
+            
+            .submit-btn {
+                padding: 15px 24px;
+                font-size: 15px;
+            }
+        }
+        
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        input, button {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+      #mainInterface .header-text {
+    color: #FF9800;
+    text-shadow: none;
+}
+
+#mainInterface .sub-header {
+    color: #F57C00;
+    text-shadow: none;
+}
+        /* Second page only - move header closer to sections */
+#mainInterface .page-header {
+    padding-bottom: 0px;
+    margin-bottom: -70px;
+}
+
+#mainInterface .sections-overlay {
+    margin-top: -60px;
+    padding-top: 0;
+}
+/* Global copyright for ALL pages */
+.global-copyright {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 9999; /* Always on top */
+    pointer-events: none; /* Don't interfere with clicks */
+}
     </style>
 </head>
 <body>
-    <!-- ========== COMBINED SCREEN WITH YOUR IMAGE AND PASSWORD ========== -->
+    <!-- Combined Screen (Image + Password) -->
     <div id="combinedScreen" class="combined-screen screen-bg screen active">
         <div class="page-header">
-            <div class="header-text">LFJC</div>
-            <div class="sub-header">Examination Portal</div>
+            <div class="header-text"></div>
+            <div class="sub-header"></div>
         </div>
         
-        <!-- ========== YOUR IMAGE FROM i.ibb.co ========== -->
+        <!-- Image Section -->
         <div class="image-container">
             <img src="https://i.ibb.co/MDKxfWzQ/1234.png" 
                  alt="LFJC Image" 
@@ -51,7 +537,7 @@
                  onerror="this.style.display='none'">
         </div>
         
-        <!-- ========== PASSWORD SECTION ========== -->
+        <!-- Password Section -->
         <div class="password-section">
             <div class="password-container">
                 <div id="errorMessage" class="error-message"></div>
@@ -63,44 +549,47 @@
                     <button id="submitBtn" class="submit-btn">submit</button>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- ========== MAIN INTERFACE - NO URLS VISIBLE! ========== -->
-    <div id="mainInterface" class="main-interface screen">
-        <div class="page-header">
-            <div class="header-text">LFJC ONLINE EXAMINATION</div>
-            <div class="sub-header">Select Your Section</div>
-        </div>
-        <div class="sections-overlay">
-            <div class="columns-container">
-                <div class="column">
-                    <button class="section-btn">1D</button>
-                    <button class="section-btn">1M</button>
-                    <button class="section-btn">1N</button>
-                    <button class="section-btn">1E</button>
-                </div>
-                <div class="column">
-                    <button class="section-btn">2D</button>
-                    <button class="section-btn">2M</button>
-                    <button class="section-btn">2N</button>
-                    <button class="section-btn">2E</button>
-                </div>
+            <!-- Copyright -->
+            <div class="copyright">
+               
             </div>
         </div>
     </div>
     
-    <!-- ========== WEB FRAME WITH BLACK BACKGROUND - NO BLINK ========== -->
+  <!-- Main Interface - SECTIONS - NO URLS VISIBLE -->
+<div id="mainInterface" class="main-interface screen">
+    <div class="page-header">
+        <div class="header-text">LFJC ONLINE EXAMINATION</div>
+        <div class="sub-header"></div>
+    </div>
+    <div class="sections-overlay">
+        <div class="columns-container">
+            <div class="column">
+                <button class="section-btn" data-section="1D">1D</button>
+                <button class="section-btn" data-section="1M">1M</button>
+                <button class="section-btn" data-section="1N">1N</button>
+                <button class="section-btn" data-section="1E">1E</button>
+            </div>
+            <div class="column">
+                <button class="section-btn" data-section="2D">2D</button>
+                <button class="section-btn" data-section="2M">2M</button>
+                <button class="section-btn" data-section="2N">2N</button>
+                <button class="section-btn" data-section="2E">2E</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Web Frame -->
     <div id="webFrame" class="web-frame screen">
         <button class="close-frame" id="closeFrame">✕</button>
-        <iframe id="contentFrame" style="width:100%; height:100%; border:none; background:#000; position:absolute; top:0; left:0; right:0; bottom:0;" srcdoc="<html style='background:#000;'><body style='background:#000;margin:0;'></body></html>"></iframe>
+        <iframe id="contentFrame" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
     </div>
 
-    <!-- ========== GLOBAL COPYRIGHT ========== -->
-    <div class="global-copyright">© LFJC 2026 All Rights Reserved</div>
-
     <script>
-        // ========== DOM ELEMENTS ==========
+        // =============================================
+        // DOM ELEMENTS
+        // =============================================
         const combinedScreen = document.getElementById('combinedScreen');
         const passwordInput = document.getElementById('passwordInput');
         const submitBtn = document.getElementById('submitBtn');
@@ -110,197 +599,352 @@
         const contentFrame = document.getElementById('contentFrame');
         const closeFrameBtn = document.getElementById('closeFrame');
         
+        // =============================================
+        // STATE VARIABLES
+        // =============================================
         let currentState = 'combined';
+        let lastPasswordType = null;
+        let isFullscreen = false;
         
-        // ========== DEV TOOLS DETECTION - FIXED FOR CLOUDFLARE ==========
-        (function() {
-            function killPage() {
-                try {
-                    document.querySelectorAll('iframe').forEach(iframe => {
-                        iframe.src = 'about:blank';
-                        iframe.remove();
-                    });
-                    document.head.innerHTML = '';
-                    document.body.innerHTML = '';
-                    document.open();
-                    document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
-                    document.close();
-                    window.stop();
-                    window.location.replace('about:blank');
-                } catch(e) {}
-            }
-            
-            function detect() {
-                // IGNORE Cloudflare Pages - DON'T KILL!
-                if (window.location.hostname.includes('pages.dev') || 
-                    window.location.hostname.includes('cloudflare')) {
-                    return; // SAFE - no kill on Cloudflare
-                }
-                
-                // ONLY kill if Dev Tools is DEFINITELY open
-                if (window.outerWidth - window.innerWidth > 200 || 
-                    window.outerHeight - window.innerHeight > 200) {
-                    killPage();
-                }
-            }
-            
-            // Check LESS frequently - every 2 seconds
-            setInterval(detect, 2000);
-            window.addEventListener('resize', detect);
-            
-            // Block keyboard shortcuts but DON'T kill page
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'F12' || e.keyCode === 123 || 
-                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                    (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-                    (e.ctrlKey && e.key === 'u')) {
-                    e.preventDefault();
-                    // DON'T killPage() - just prevent
-                }
-            }, true);
-            
-            // Block right click
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            }, true);
-        })();
-        
-        // ========== PASSWORD CHECK ==========
-        async function checkPassword() {
-            const password = passwordInput.value.trim();
-            
-            errorMsg.style.display = 'none';
-            
-            if (!password) {
-                errorMsg.textContent = 'Please enter a password';
-                errorMsg.style.display = 'block';
-                shakeBox();
-                return;
-            }
-            
-            if (password === 'lfjc2025') {
-                combinedScreen.classList.remove('active');
-                mainInterface.classList.add('active');
-                passwordInput.value = '';
-                currentState = 'sections';
-            } else {
-                errorMsg.textContent = 'Incorrect password. Please try again.';
-                errorMsg.style.display = 'block';
-                passwordInput.value = '';
-                shakeBox();
-                passwordInput.focus();
-            }
-        }
-        
-        // ========== EVENT LISTENERS ==========
-        submitBtn.addEventListener('click', checkPassword);
-        
-        passwordInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
+        // =============================================
+        // SECURITY: DISABLE RIGHT-CLICK AND DEV TOOLS
+        // =============================================
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
         });
         
-        // ========== CLOSE FRAME ==========
-        closeFrameBtn.addEventListener('click', function() {
-            contentFrame.src = 'about:blank';
-            webFrame.classList.remove('active');
-            combinedScreen.classList.add('active');
-            currentState = 'combined';
-            passwordInput.value = '';
-            passwordInput.focus();
-        });
-        
-        // ========== 🔥 HIDDEN URLS - BASE64 ENCODED ==========
-        const ENCODED_URLS = [
-            'aHR0cHM6Ly8xZC1hbmEucGFnZXMuZGV2', // 1D
-            'aHR0cHM6Ly8xbS02cTMucGFnZXMuZGV2', // 1M
-            'aHR0cHM6Ly8xbi1hajMucGFnZXMuZGV2', // 1N
-            'aHR0cHM6Ly8xZS1jdDYucGFnZXMuZGV2', // 1E
-            'aHR0cHM6Ly8yZC1lN3QucGFnZXMuZGV2', // 2D
-            'aHR0cHM6Ly8ybS04N2UucGFnZXMuZGV2', // 2M
-            'aHR0cHM6Ly8ybi1lZGYucGFnZXMuZGV2', // 2N
-            'aHR0cHM6Ly8yZS0ybTMucGFnZXMuZGV2'  // 2E
-        ];
-        
-        // ========== SECTION BUTTONS - NO BLINK, NO WHITE FLASH ==========
-        const buttons = document.querySelectorAll('.section-btn');
-        buttons.forEach((btn, index) => {
-            btn.addEventListener('click', function() {
-                // DECODE BASE64 TO GET REAL URL
-                const realUrl = atob(ENCODED_URLS[index]);
-                
-                // FIRST show black iframe
-                mainInterface.classList.remove('active');
-                webFrame.classList.add('active');
-                
-                // CLEAR any previous content
-                contentFrame.src = 'about:blank';
-                
-                // SHORT delay to ensure black screen is visible
-                setTimeout(() => {
-                    // THEN load the URL - NO BLINK!
-                    contentFrame.src = realUrl;
-                }, 50);
-                
-                currentState = 'iframe';
-            });
-        });
-        
-        // ========== ESCAPE KEY ==========
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                if (currentState === 'sections') {
-                    mainInterface.classList.remove('active');
-                    combinedScreen.classList.add('active');
-                    currentState = 'combined';
-                    passwordInput.value = '';
-                    passwordInput.focus();
-                } else if (currentState === 'iframe') {
-                    contentFrame.src = 'about:blank';
-                    webFrame.classList.remove('active');
-                    combinedScreen.classList.add('active');
-                    currentState = 'combined';
-                    passwordInput.value = '';
-                    passwordInput.focus();
-                }
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                return false;
             }
         });
         
-        // ========== UTILITY FUNCTIONS ==========
-        function shakeBox() {
-            const box = document.querySelector('.password-box');
-            if (box) {
-                box.style.animation = 'shake 0.5s';
-                setTimeout(() => { box.style.animation = ''; }, 500);
+        // =============================================
+        // CLOUDFLARE API AUTHENTICATION
+        // =============================================
+        async function checkPasswordCloudflare(password) {
+            try {
+                // Call Cloudflare Function
+                const response = await fetch('/api/check-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ password: password })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                return data;
+                
+            } catch (error) {
+                console.error('Auth error:', error);
+                return { 
+                    success: false, 
+                    message: 'Authentication service unavailable. Please try again.' 
+                };
             }
         }
         
-        function forceFocus() {
+        // =============================================
+        // INSTANT SCREEN SWITCHING - NO DELAYS
+        // =============================================
+        function switchScreen(fromScreen, toScreen) {
+            if (fromScreen) {
+                fromScreen.classList.remove('active');
+            }
+            if (toScreen) {
+                toScreen.classList.add('active');
+            }
+        }
+        
+        // =============================================
+        // FULLSCREEN MANAGEMENT
+        // =============================================
+        function enterFullScreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => {
+                    console.log("Fullscreen error:", err);
+                });
+            }
+            isFullscreen = true;
+        }
+        
+        function checkFullscreen() {
+            const isCurrentlyFullscreen = !!(
+                document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                document.mozFullScreenElement ||
+                document.msFullscreenElement
+            );
+            
+            if (!isCurrentlyFullscreen && currentState !== 'combined') {
+                enterFullScreen();
+            }
+            isFullscreen = isCurrentlyFullscreen;
+        }
+        
+        // =============================================
+        // PASSWORD INPUT FOCUS
+        // =============================================
+        function forcePasswordFocus() {
             setTimeout(() => {
-                passwordInput.focus();
+                if (passwordInput) {
+                    passwordInput.focus();
+                    passwordInput.setSelectionRange(
+                        passwordInput.value.length,
+                        passwordInput.value.length
+                    );
+                }
             }, 100);
         }
         
-        function goFullscreen() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen().catch(() => {});
+        // =============================================
+        // APPLICATION LOGIC - INSTANT
+        // =============================================
+        // Auto focus on page load
+        window.addEventListener('load', function() {
+            enterFullScreen();
+            forcePasswordFocus();
+        });
+        
+        // Focus when clicking anywhere
+        document.addEventListener('click', function() {
+            if (currentState === 'combined') {
+                forcePasswordFocus();
+                enterFullScreen();
+            }
+        });
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                
+                if (currentState === 'sections') {
+                    switchScreen(mainInterface, combinedScreen);
+                    currentState = 'combined';
+                    passwordInput.value = '';
+                    forcePasswordFocus();
+                }
+                else if (currentState === 'iframe') {
+                    if (lastPasswordType === 'redirect' || lastPasswordType === 'lockunlock') {
+                        contentFrame.src = 'about:blank';
+                        switchScreen(webFrame, combinedScreen);
+                        currentState = 'combined';
+                        passwordInput.value = '';
+                        forcePasswordFocus();
+                    } else {
+                        contentFrame.src = 'about:blank';
+                        switchScreen(webFrame, mainInterface);
+                        currentState = 'sections';
+                    }
+                }
+                return false;
+            }
+        });
+        
+        // =============================================
+        // PASSWORD AUTHENTICATION - CLOUDFLARE API
+        // =============================================
+        async function checkPassword() {
+            const enteredPassword = passwordInput.value.trim();
+            
+            errorMsg.style.display = 'none';
+            
+            if (!enteredPassword) {
+                showError('Please enter a password');
+                shakePasswordBox();
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Verifying...';
+            
+            try {
+                const result = await checkPasswordCloudflare(enteredPassword);
+                
+                if (result.success) {
+                    lastPasswordType = result.type;
+                    
+                    if (result.type === 'sections') {
+                        switchScreen(combinedScreen, mainInterface);
+                        passwordInput.value = '';
+                        currentState = 'sections';
+                    } 
+                    else if (result.type === 'redirect') {
+                        switchScreen(combinedScreen, webFrame);
+                        passwordInput.value = '';
+                        currentState = 'iframe';
+                        contentFrame.src = result.url || 'https://work-7ru.pages.dev/';
+                    }
+                    else if (result.type === 'lockunlock') {
+                        switchScreen(combinedScreen, webFrame);
+                        passwordInput.value = '';
+                        currentState = 'iframe';
+                        contentFrame.src = result.url || 'https://lockunlock.pages.dev/';
+                    }
+                } else {
+                    showError(result.message || 'Incorrect password. Please try again.');
+                    passwordInput.value = '';
+                    forcePasswordFocus();
+                    shakePasswordBox();
+                }
+            } catch (error) {
+                showError('Authentication error. Please try again.');
+                console.error('Auth error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
             }
         }
         
+        submitBtn.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+        
+        closeFrameBtn.addEventListener('click', function() {
+            if (lastPasswordType === 'redirect' || lastPasswordType === 'lockunlock') {
+                contentFrame.src = 'about:blank';
+                switchScreen(webFrame, combinedScreen);
+                currentState = 'combined';
+                passwordInput.value = '';
+                forcePasswordFocus();
+            } else {
+                contentFrame.src = 'about:blank';
+                switchScreen(webFrame, mainInterface);
+                currentState = 'sections';
+            }
+        });
+        
+       // =============================================
+// SECTION BUTTONS - URLS FROM CLOUDFLARE (HIDDEN)
+// =============================================
+document.querySelectorAll('.section-btn').forEach(btn => {
+    btn.addEventListener('click', async function() {
+        const section = this.dataset.section;
+        
+        if (!section) {
+            console.error('No section data');
+            return;
+        }
+        
+        // Visual feedback
+        this.style.transform = 'scale(0.96)';
+        this.style.opacity = '0.9';
+        
+        try {
+            // Fetch URL from Cloudflare Function - NO URL IN CODE!
+            const response = await fetch('/api/get-section-url', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ section: section })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.success && data.url) {
+                // Clear any previous password type
+                lastPasswordType = null;
+                
+                // Switch to web frame
+                switchScreen(mainInterface, webFrame);
+                currentState = 'iframe';
+                
+                // Load the URL from server - COMPLETELY HIDDEN!
+                contentFrame.src = data.url;
+                
+                console.log(`Loading section ${section}`);
+            } else {
+                showError('Section not available. Please try again.');
+            }
+            
+        } catch (error) {
+            console.error('Error loading section:', error);
+            showError('Failed to load section. Please check your connection.');
+        } finally {
+            // Reset button visual
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.opacity = '';
+            }, 150);
+        }
+    });
+});
+        
+    // =============================================
+// HELPER FUNCTIONS
+// =============================================
+function showError(message) {
+    errorMsg.textContent = message;
+    errorMsg.style.display = 'block';
+    
+    // Auto-hide after 4 seconds
+    setTimeout(() => {
+        errorMsg.style.display = 'none';
+    }, 4000);
+}
+
+function shakePasswordBox() {
+    const passwordBox = document.querySelector('.password-box');
+    if (passwordBox) {
+        passwordBox.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            passwordBox.style.animation = '';
+        }, 500);
+    }
+}
+        
+        // =============================================
+        // INITIALIZATION
+        // =============================================
         window.addEventListener('load', function() {
             passwordInput.value = '';
             errorMsg.style.display = 'none';
-            goFullscreen();
-            forceFocus();
+            enterFullScreen();
+            forcePasswordFocus();
         });
         
-        document.addEventListener('click', function() {
-            if (currentState === 'combined') {
-                forceFocus();
-                goFullscreen();
-            }
-        });
+        // Check fullscreen continuously
+        setInterval(checkFullscreen, 100);
+        
+        // Force fullscreen on interaction
+        document.addEventListener('click', checkFullscreen);
+        document.addEventListener('keydown', checkFullscreen);
     </script>
+   <!-- Copyright for ALL pages -->
+<div class="global-copyright">
+    © LFJC 2026 All Rights Reserved
+</div> 
 </body>
 </html>
