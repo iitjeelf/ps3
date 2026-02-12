@@ -108,48 +108,19 @@
         
         let currentState = 'combined';
         
-        // ========== DEV TOOLS DETECTION ==========
-        (function() {
-            function killPage() {
-                try {
-                    document.querySelectorAll('iframe').forEach(iframe => {
-                        iframe.src = 'about:blank';
-                        iframe.remove();
-                    });
-                    document.head.innerHTML = '';
-                    document.body.innerHTML = '';
-                    document.open();
-                    document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
-                    document.close();
-                    window.stop();
-                    window.location.replace('about:blank');
-                } catch(e) {}
-            }
-            
-            function detect() {
-                if (window.outerWidth - window.innerWidth > 80 || 
-                    window.outerHeight - window.innerHeight > 80) {
-                    killPage();
-                }
-            }
-            
-            setInterval(detect, 10);
-            window.addEventListener('resize', detect);
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'F12' || e.keyCode === 123 || 
-                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                    (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-                    (e.ctrlKey && e.key === 'u')) {
-                    e.preventDefault();
-                    killPage();
-                }
-            }, true);
-            
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            }, true);
-        })();
+       // ========== SIMPLE PROTECTION - NO FALSE POSITIVES ==========
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+        (e.ctrlKey && e.key === 'u')) {
+        e.preventDefault();
+    }
+});
         
         // ========== PASSWORD CHECK ==========
         async function checkPassword() {
