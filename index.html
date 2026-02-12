@@ -11,20 +11,16 @@
     <!-- ========== BLOCK view-source: IMMEDIATELY ========== -->
     <script>
         (function() {
-            // DETECT view-source: AND KILL INSTANTLY
             if (window.location.protocol === 'view-source:' || 
                 window.location.href.indexOf('view-source:') > -1 ||
                 window.location.href.indexOf('View-source:') > -1 ||
                 window.location.href.indexOf('VIEW-SOURCE:') > -1) {
                 
-                // COMPLETE BLANK PAGE - NOTHING VISIBLE
                 window.location.replace('about:blank');
                 document.open();
                 document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
                 document.close();
                 window.stop();
-                
-                // KILL EVERYTHING
                 throw new Error('View source blocked');
             }
         })();
@@ -39,8 +35,8 @@
     <!-- ========== COMBINED SCREEN WITH YOUR IMAGE AND PASSWORD ========== -->
     <div id="combinedScreen" class="combined-screen screen-bg screen active">
         <div class="page-header">
-            <div class="header-text"></div>
-            <div class="sub-header"></div>
+            <div class="header-text">LFJC</div>
+            <div class="sub-header">Examination Portal</div>
         </div>
         
         <!-- ========== YOUR IMAGE FROM i.ibb.co ========== -->
@@ -70,7 +66,7 @@
     <div id="mainInterface" class="main-interface screen">
         <div class="page-header">
             <div class="header-text">LFJC ONLINE EXAMINATION</div>
-            <div class="sub-header"></div>
+            <div class="sub-header">Select Your Section</div>
         </div>
         <div class="sections-overlay">
             <div class="columns-container">
@@ -90,10 +86,10 @@
         </div>
     </div>
     
-    <!-- ========== WEB FRAME FOR OPENING URLS ========== -->
+    <!-- ========== WEB FRAME WITH BLACK BACKGROUND - NO BLINK ========== -->
     <div id="webFrame" class="web-frame screen">
         <button class="close-frame" id="closeFrame">✕</button>
-        <iframe id="contentFrame" style="width:100%; height:100%; border:none; background:#000; position:absolute; top:0; left:0; right:0; bottom:0;"></iframe>
+        <iframe id="contentFrame" style="width:100%; height:100%; border:none; background:#000; position:absolute; top:0; left:0; right:0; bottom:0;" srcdoc="<html style='background:#000;'><body style='background:#000;margin:0;'></body></html>"></iframe>
     </div>
 
     <!-- ========== GLOBAL COPYRIGHT ========== -->
@@ -213,19 +209,26 @@
             'aHR0cHM6Ly8yZS0ybTMucGFnZXMuZGV2'  // 2E
         ];
         
-        // ========== SECTION BUTTONS - NO URLS VISIBLE! ==========
+        // ========== SECTION BUTTONS - NO BLINK, NO WHITE FLASH ==========
         const buttons = document.querySelectorAll('.section-btn');
         buttons.forEach((btn, index) => {
             btn.addEventListener('click', function() {
                 // DECODE BASE64 TO GET REAL URL
                 const realUrl = atob(ENCODED_URLS[index]);
                 
-                // LOAD IN IFRAME
-                contentFrame.src = realUrl;
-                
-                // SHOW IFRAME
+                // FIRST show black iframe
                 mainInterface.classList.remove('active');
                 webFrame.classList.add('active');
+                
+                // CLEAR any previous content
+                contentFrame.src = 'about:blank';
+                
+                // SHORT delay to ensure black screen is visible
+                setTimeout(() => {
+                    // THEN load the URL - NO BLINK!
+                    contentFrame.src = realUrl;
+                }, 50);
+                
                 currentState = 'iframe';
             });
         });
