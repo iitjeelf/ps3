@@ -8,19 +8,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- ========== BLOCK view-source: IMMEDIATELY ========== -->
+    <!-- ========== BLOCK VIEW SOURCE ========== -->
     <script>
         (function() {
             if (window.location.protocol === 'view-source:' || 
-                window.location.href.indexOf('view-source:') > -1 ||
-                window.location.href.indexOf('View-source:') > -1 ||
-                window.location.href.indexOf('VIEW-SOURCE:') > -1) {
+                window.location.href.indexOf('view-source:') > -1) {
                 window.location.replace('about:blank');
                 document.open();
-                document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
+                document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;}</style></head><body></body></html>');
                 document.close();
                 window.stop();
-                throw new Error('View source blocked');
+                throw new Error('Blocked');
             }
         })();
     </script>
@@ -31,22 +29,17 @@
     </style>
 </head>
 <body>
-    <!-- ========== COMBINED SCREEN WITH YOUR IMAGE AND PASSWORD ========== -->
+    <!-- ========== COMBINED SCREEN ========== -->
     <div id="combinedScreen" class="combined-screen screen-bg screen active">
         <div class="page-header">
             <div class="header-text"></div>
             <div class="sub-header"></div>
         </div>
         
-        <!-- ========== YOUR IMAGE FROM i.ibb.co ========== -->
         <div class="image-container">
-            <img src="https://i.ibb.co/MDKxfWzQ/1234.png" 
-                 alt="LFJC Image" 
-                 class="page-image"
-                 onerror="this.style.display='none'">
+            <img src="https://i.ibb.co/MDKxfWzQ/1234.png" alt="LFJC Image" class="page-image" onerror="this.style.display='none'">
         </div>
         
-        <!-- ========== PASSWORD SECTION ========== -->
         <div class="password-section">
             <div class="password-container">
                 <div id="errorMessage" class="error-message"></div>
@@ -61,7 +54,7 @@
         </div>
     </div>
     
-    <!-- ========== MAIN INTERFACE - NO DATA ATTRIBUTES, NO PATHS ========== -->
+    <!-- ========== MAIN INTERFACE - NO URLS VISIBLE ========== -->
     <div id="mainInterface" class="main-interface screen">
         <div class="page-header">
             <div class="header-text">LFJC ONLINE EXAMINATION</div>
@@ -85,13 +78,12 @@
         </div>
     </div>
     
-    <!-- ========== WEB FRAME - SIMPLE IFRAME, NO SANDBOX ========== -->
+    <!-- ========== WEB FRAME ========== -->
     <div id="webFrame" class="web-frame screen">
         <button class="close-frame" id="closeFrame">✕</button>
         <iframe id="contentFrame" style="width:100%; height:100%; border:none; background:#000;"></iframe>
     </div>
 
-    <!-- ========== GLOBAL COPYRIGHT ========== -->
     <div class="global-copyright">© LFJC 2026 All Rights Reserved</div>
 
     <script>
@@ -118,7 +110,7 @@
                     document.head.innerHTML = '';
                     document.body.innerHTML = '';
                     document.open();
-                    document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;margin:0;padding:0;}</style></head><body></body></html>');
+                    document.write('<!DOCTYPE html><html><head><title></title><style>body{background:#000;}</style></head><body></body></html>');
                     document.close();
                     window.stop();
                     window.location.replace('about:blank');
@@ -126,10 +118,7 @@
             }
             
             function detect() {
-                if (window.outerWidth - window.innerWidth > 80 || 
-                    window.outerHeight - window.innerHeight > 80) {
-                    killPage();
-                }
+                if (window.outerWidth - window.innerWidth > 80 || window.outerHeight - window.innerHeight > 80) killPage();
             }
             
             setInterval(detect, 10);
@@ -145,15 +134,12 @@
                 }
             }, true);
             
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            }, true);
+            document.addEventListener('contextmenu', e => e.preventDefault());
         })();
         
         // ========== PASSWORD CHECK ==========
         async function checkPassword() {
             const password = passwordInput.value.trim();
-            
             errorMsg.style.display = 'none';
             
             if (!password) {
@@ -177,16 +163,9 @@
             }
         }
         
-        // ========== EVENT LISTENERS ==========
         submitBtn.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', e => { if (e.key === 'Enter') checkPassword(); });
         
-        passwordInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPassword();
-            }
-        });
-        
-        // ========== CLOSE FRAME ==========
         closeFrameBtn.addEventListener('click', function() {
             contentFrame.src = 'about:blank';
             webFrame.classList.remove('active');
@@ -196,12 +175,26 @@
             passwordInput.focus();
         });
         
-        // ========== SECTION BUTTONS - NO PATHS, ONLY INDEX! ==========
+        // ========== 🔥 HIDDEN URLS - BASE64 ENCODED ==========
+        // NO REAL URLS VISIBLE IN CODE!
+        const ENCODED_URLS = [
+            'aHR0cHM6Ly8xZC1hbmEucGFnZXMuZGV2', // 1D
+            'aHR0cHM6Ly8xbS02cTMucGFnZXMuZGV2', // 1M
+            'aHR0cHM6Ly8xbi1hajMucGFnZXMuZGV2', // 1N
+            'aHR0cHM6Ly8xZS1jdDYucGFnZXMuZGV2', // 1E
+            'aHR0cHM6Ly8yZC1lN3QucGFnZXMuZGV2', // 2D
+            'aHR0cHM6Ly8ybS04N2UucGFnZXMuZGV2', // 2M
+            'aHR0cHM6Ly8ybi1lZGYucGFnZXMuZGV2', // 2N
+            'aHR0cHM6Ly8yZS0ybTMucGFnZXMuZGV2'  // 2E
+        ];
+        
+        // ========== BUTTON CLICK HANDLER ==========
         const buttons = document.querySelectorAll('.section-btn');
         buttons.forEach((btn, index) => {
             btn.addEventListener('click', function() {
-                // Set iframe src to generic endpoint with index
-                contentFrame.src = '/go?i=' + index;
+                // DECODE AND LOAD - NO URLS VISIBLE IN CODE!
+                const realUrl = atob(ENCODED_URLS[index]);
+                contentFrame.src = realUrl;
                 
                 mainInterface.classList.remove('active');
                 webFrame.classList.add('active');
@@ -229,26 +222,16 @@
             }
         });
         
-        // ========== UTILITY FUNCTIONS ==========
         function shakeBox() {
             const box = document.querySelector('.password-box');
             if (box) {
                 box.style.animation = 'shake 0.5s';
-                setTimeout(() => { box.style.animation = ''; }, 500);
+                setTimeout(() => box.style.animation = '', 500);
             }
         }
         
-        function forceFocus() {
-            setTimeout(() => {
-                passwordInput.focus();
-            }, 100);
-        }
-        
-        function goFullscreen() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen().catch(() => {});
-            }
-        }
+        function forceFocus() { setTimeout(() => passwordInput.focus(), 100); }
+        function goFullscreen() { if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {}); }
         
         window.addEventListener('load', function() {
             passwordInput.value = '';
