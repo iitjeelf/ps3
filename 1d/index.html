@@ -3007,12 +3007,8 @@ function resumeFromPowerLoss(progressData) {
     // Store original click handler
     const originalClick = startBtn.onclick;
     
-    // Override click handler for resume
-    startBtn.onclick = function() {
-        if (validateStudentInputs()) {
-            startExamWithRecovery(progressData);
-        }
-    };
+  // ✅ REMOVE THIS ENTIRE BLOCK - DON'T OVERRIDE THE CLICK HANDLER
+// The button already works with startWithSecurity()
     
     // Validate to show start button
     validateStudentInputs();
