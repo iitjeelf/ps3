@@ -1,15 +1,30 @@
-// middleware.js - KV Storage Version
+// middleware.js - Using ACCESS_CODE secret from Cloudflare
 export async function onRequest(context) {
   const { request, next, env } = context;
   const url = new URL(request.url);
   const hostname = url.hostname;
   
+  // Get access code from Cloudflare Secret
+  const ACCESS_CODE = env.ACCESS_CODE; // This reads your secret with value "lfjc2025"
+  
   // KV namespace - bound in Cloudflare Dashboard
   const KV = env.CLASS_STATES;
   
-  // === ADMIN CONTROL ===
+  // === ADMIN CONTROL WITH ACCESS CODE ===
   if (url.pathname === "/admin-control") {
     const action = url.searchParams.get("do");
+    const password = url.searchParams.get("pwd");
+    
+    // 🔒 CHECK AGAINST YOUR ACCESS CODE SECRET
+    if (password !== ACCESS_CODE) {
+      return new Response("UNAUTHORIZED", { 
+        status: 401,
+        headers: { 
+          "Content-Type": "text/plain",
+          "Access-Control-Allow-Origin": "*"
+        }
+      });
+    }
     
     // LOCK
     if (action === "lock") {
