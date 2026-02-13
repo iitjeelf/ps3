@@ -1028,32 +1028,7 @@ function enforceFullScreen() {
             showFullScreenWarning();
             
             // Try to enter full screen
-            try {
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.webkitRequestFullscreen) {
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) {
-                    elem.msRequestFullscreen();
-                } else if (elem.mozRequestFullScreen) {
-                    elem.mozRequestFullScreen();
-                }
-            } catch (err) {
-                console.log("Fullscreen error:", err);
-            }
-        } else {
-            // Remove blur if full screen is active
-            removeFullScreenBlur();
-            fullScreenWarningShown = false;
-        }
-    } else {
-        // Not in exam mode, remove blur if exists
-        removeFullScreenBlur();
-        fullScreenWarningShown = false;
-    }
-}
-
+           enterFullScreen();
 function showFullScreenWarning() {
     // Don't show if already shown or if already in full screen
     if (fullScreenWarningShown) return;
