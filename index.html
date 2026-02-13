@@ -805,57 +805,62 @@
             }
         });
         
-        // =============================================
-        // SECTION BUTTONS - URLS FROM CLOUDFLARE (HIDDEN)
-        // =============================================
-        document.querySelectorAll('.section-btn').forEach(btn => {
-            btn.addEventListener('click', async function() {
-                const section = this.dataset.section;
-                
-                if (!section) {
-                    console.error('No section data');
-                    return;
-                }
-                
-                this.style.transform = 'scale(0.96)';
-                this.style.opacity = '0.9';
-                
-                try {
-                    const response = await fetch('/api/get-section-url', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ section: section })
-                    });
-                    
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    
-                    const data = await response.json();
-                    
-                    if (data.success && data.url) {
-                        lastPasswordType = null;
-                        switchScreen(mainInterface, webFrame);
-                        currentState = 'iframe';
-                        contentFrame.src = data.url;
-                        console.log(`Loading section ${section}`);
-                    } else {
-                        showError('Section not available. Please try again.');
-                    }
-                    
-                } catch (error) {
-                    console.error('Error loading section:', error);
-                    showError('Failed to load section. Please check your connection.');
-                } finally {
-                    setTimeout(() => {
-                        this.style.transform = '';
-                        this.style.opacity = '';
-                    }, 150);
-                }
+      // =============================================
+// SECTION BUTTONS - URLS FROM CLOUDFLARE (HIDDEN)
+// =============================================
+document.querySelectorAll('.section-btn').forEach(btn => {
+    btn.addEventListener('click', async function() {
+        const section = this.dataset.section;
+        
+        if (!section) {
+            console.error('No section data');
+            return;
+        }
+        
+        this.style.transform = 'scale(0.96)';
+        this.style.opacity = '0.9';
+        
+        try {
+            const response = await fetch('/api/get-section-url', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ section: section })
             });
-        });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.success && data.url) {
+                lastPasswordType = null;
+                
+                // ✅ ADD THIS - Add recovery check parameter
+                const url = new URL(data.url);
+                url.searchParams.set('checkRecovery', 'true');
+                
+                switchScreen(mainInterface, webFrame);
+                currentState = 'iframe';
+                contentFrame.src = url.toString();
+                console.log(`Loading section ${section} with recovery check`);
+            } else {
+                showError('Section not available. Please try again.');
+            }
+            
+        } catch (error) {
+            console.error('Error loading section:', error);
+            showError('Failed to load section. Please check your connection.');
+        } finally {
+            setTimeout(() => {
+                this.style.transform = '';
+                this.style.opacity = '';
+            }, 150);
+        }
+    });
+});
         
         // =============================================
         // HELPER FUNCTIONS
