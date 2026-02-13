@@ -4945,6 +4945,47 @@ console.log("📁 Loading answer key from: " + ANSWER_KEY_URL);
 console.log("✅ All security systems integrated: Full-screen, Tab switching, System tray, Power loss recovery");
 console.log("🖱️ Auto-click system enabled: Clicks every 30 seconds to prevent screen sleep");
 console.log("🔋 Keep-awake system: Wake Lock, silent video, keyboard activity, safe click zones");
+// ===== EMERGENCY FIX - FORCE START NEW BUTTON TO WORK =====
+document.addEventListener('DOMContentLoaded', function() {
+    const startNewBtn = document.getElementById('startNewBtn');
+    if (startNewBtn) {
+        startNewBtn.onclick = function() {
+            if (confirm('Are you sure you want to start a new exam? The current progress will be lost.')) {
+                clearSavedExam();
+                document.getElementById('resumeExamSection').style.display = 'none';
+                document.getElementById('stuName').value = '';
+                document.getElementById('stuSection').value = '';
+                document.getElementById('stuRoll').value = '';
+                document.getElementById('stuAdm').value = '';
+                document.getElementById('stuName').focus();
+                showToast('🗑️ Previous exam cleared', 'info', 3000);
+                document.getElementById('accessDenied').style.display = 'flex';
+                document.getElementById('studentEntry').style.display = 'none';
+            }
+        };
+        console.log('✅ Start New Button FORCEFULLY attached');
+    }
+});
+
+// ===== ALSO FIX VALIDATE FUNCTION - ADD THIS AT VERY END =====
+const originalValidate = validateStudentInputs;
+validateStudentInputs = function() {
+    const result = originalValidate.call(this);
+    // Force button state when student entry is visible
+    if (document.getElementById('studentEntry').style.display === 'flex') {
+        const n = document.getElementById('stuName'),
+              s = document.getElementById('stuSection'),
+              r = document.getElementById('stuRoll'),
+              a = document.getElementById('stuAdm');
+        const allValid = /^[A-Za-z .]+$/.test(n.value) && 
+                        /^[A-Za-z0-9]+$/.test(s.value) && 
+                        /^[0-9]+$/.test(r.value) && 
+                        /^[0-9]+$/.test(a.value) && 
+                        keyLoaded;
+        document.getElementById('stuStartBtn').style.display = allValid ? 'inline-block' : 'none';
+    }
+    return result;
+};
 </script>
 </body>
 </html>
