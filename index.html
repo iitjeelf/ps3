@@ -1239,37 +1239,7 @@ switchScreen = function(fromScreen, toScreen) {
     }
 };
 
-// Override enterFullScreen
-const originalEnterFullScreen = enterFullScreen;
-enterFullScreen = function() {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen().then(() => {
-            removeFullScreenBlur();
-        }).catch(err => {
-            console.log("Fullscreen error:", err);
-        });
-    } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen().then(() => {
-            removeFullScreenBlur();
-        }).catch(err => {
-            console.log("Fullscreen error:", err);
-        });
-    } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen().then(() => {
-            removeFullScreenBlur();
-        }).catch(err => {
-            console.log("Fullscreen error:", err);
-        });
-    } else if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen().then(() => {
-            removeFullScreenBlur();
-        }).catch(err => {
-            console.log("Fullscreen error:", err);
-        });
-    }
-    isFullscreen = true;
-};
+
     </script>
    <!-- Copyright for ALL pages -->
 <div class="global-copyright">
