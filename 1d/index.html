@@ -3004,11 +3004,7 @@ function resumeFromPowerLoss(progressData) {
     const startBtn = document.getElementById('stuStartBtn');
     startBtn.textContent = 'Continue Exam';
     
-    // Store original click handler
-    const originalClick = startBtn.onclick;
-    
-  // ✅ REMOVE THIS ENTIRE BLOCK - DON'T OVERRIDE THE CLICK HANDLER
-// The button already works with startWithSecurity()
+    // ✅ REMOVED: startBtn.onclick override - KEEP ORIGINAL HANDLER
     
     // Validate to show start button
     validateStudentInputs();
@@ -3058,7 +3054,7 @@ function discardPowerLossRecovery() {
         clearSavedExam();
         document.getElementById('powerLossRecoveryOverlay').style.display = 'none';
         showToast('🗑️ Saved exam discarded', 'info', 3000);
-        // Show student entry for fresh start
+        // Show access denied screen for fresh start
         document.getElementById('accessDenied').style.display = 'flex';
         document.getElementById('studentEntry').style.display = 'none';
     }
@@ -3095,7 +3091,7 @@ function checkResumeExam() {
                 resumeFromPowerLoss(progressData);
             };
             
-            // Setup start new button
+            // ✅ FIXED: Setup start new button with proper screen transition
             document.getElementById('startNewBtn').onclick = function() {
                 if (confirm('Are you sure you want to start a new exam? The current progress will be lost.')) {
                     clearSavedExam();
@@ -3106,6 +3102,10 @@ function checkResumeExam() {
                     document.getElementById('stuAdm').value = '';
                     document.getElementById('stuName').focus();
                     showToast('🗑️ Previous exam cleared', 'info', 3000);
+                    
+                    // ✅ Show access denied screen
+                    document.getElementById('accessDenied').style.display = 'flex';
+                    document.getElementById('studentEntry').style.display = 'none';
                 }
             };
         }
