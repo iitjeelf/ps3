@@ -519,6 +519,32 @@
     z-index: 9999; /* Always on top */
     pointer-events: none; /* Don't interfere with clicks */
 }
+ /* Full Screen Warning Animations */
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 15px 30px rgba(255,152,0,0.3); }
+    50% { transform: scale(1.05); box-shadow: 0 25px 50px rgba(255,152,0,0.5); }
+    100% { transform: scale(1); box-shadow: 0 15px 30px rgba(255,152,0,0.3); }
+}
+
+#force-fullscreen-btn {
+    animation: pulse 2s infinite;
+}
+
+#force-fullscreen-btn:hover {
+    animation: none;
+    transform: scale(1.05) !important;
+    background: linear-gradient(135deg, #FFA726, #FB8C00) !important;
+}
+
+/* Blur transition */
+#fullscreen-blur-overlay {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}       
     </style>
 </head>
 <body>
@@ -941,6 +967,269 @@ function shakePasswordBox() {
         // Force fullscreen on interaction
         document.addEventListener('click', checkFullscreen);
         document.addEventListener('keydown', checkFullscreen);
+ // =============================================
+// FULL SCREEN REQUIREMENT - BLUR + PROMPT
+// =============================================
+let fullScreenWarningShown = false;
+let fullScreenCheckInterval = null;
+
+function enforceFullScreen() {
+    // Only enforce when in exam sections or iframe
+    if (currentState === 'sections' || currentState === 'iframe') {
+        const isFullScreen = !!(
+            document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.mozFullScreenElement ||
+            document.msFullscreenElement
+        );
+        
+        if (!isFullScreen) {
+            // Show warning and blur
+            showFullScreenWarning();
+            
+            // Try to enter full screen
+            try {
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                }
+            } catch (err) {
+                console.log("Fullscreen error:", err);
+            }
+        } else {
+            // Remove blur if full screen is active
+            removeFullScreenBlur();
+            fullScreenWarningShown = false;
+        }
+    } else {
+        // Not in exam mode, remove blur if exists
+        removeFullScreenBlur();
+        fullScreenWarningShown = false;
+    }
+}
+
+function showFullScreenWarning() {
+    // Don't show if already shown or if already in full screen
+    if (fullScreenWarningShown) return;
+    
+    // Remove any existing overlay first
+    removeFullScreenBlur();
+    
+    fullScreenWarningShown = true;
+    
+    // Create blur overlay
+    const blurOverlay = document.createElement('div');
+    blurOverlay.id = 'fullscreen-blur-overlay';
+    blurOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 999999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        font-family: 'Arial Black', 'Segoe UI', sans-serif;
+        text-align: center;
+        padding: 20px;
+    `;
+    
+    blurOverlay.innerHTML = `
+        <div style="
+            background: linear-gradient(145deg, #141E30, #243B55);
+            padding: 50px;
+            border-radius: 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.2);
+        ">
+            <div style="font-size: 80px; margin-bottom: 20px; text-shadow: 0 10px 20px rgba(0,0,0,0.5);">🖥️</div>
+            <h2 style="
+                font-size: 36px; 
+                margin-bottom: 20px; 
+                color: white; 
+                text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+                letter-spacing: 2px;
+            ">FULL SCREEN REQUIRED</h2>
+            <p style="
+                font-size: 20px; 
+                margin-bottom: 30px; 
+                line-height: 1.6; 
+                color: rgba(255,255,255,0.95);
+                font-weight: 500;
+            ">
+                This examination requires full screen mode to ensure exam integrity.
+            </p>
+            <button id="force-fullscreen-btn" style="
+                background: linear-gradient(135deg, #FF9800, #F57C00);
+                color: white;
+                border: none;
+                padding: 18px 50px;
+                font-size: 24px;
+                font-weight: bold;
+                border-radius: 60px;
+                cursor: pointer;
+                box-shadow: 0 15px 30px rgba(255,152,0,0.3);
+                transition: all 0.3s ease;
+                border: 2px solid rgba(255,255,255,0.3);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+            ">ENTER FULL SCREEN</button>
+            <p style="
+                margin-top: 30px; 
+                font-size: 16px; 
+                color: rgba(255,255,255,0.7);
+            ">
+                ⚠️ Exam will continue automatically after entering full screen
+            </p>
+        </div>
+    `;
+    
+    document.body.appendChild(blurOverlay);
+    
+    // Add click handler to button
+    setTimeout(() => {
+        const btn = document.getElementById('force-fullscreen-btn');
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen().then(() => {
+                        removeFullScreenBlur();
+                    }).catch(err => console.log(err));
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen().then(() => {
+                        removeFullScreenBlur();
+                    }).catch(err => console.log(err));
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen().then(() => {
+                        removeFullScreenBlur();
+                    }).catch(err => console.log(err));
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen().then(() => {
+                        removeFullScreenBlur();
+                    }).catch(err => console.log(err));
+                }
+            });
+            
+            // Also add hover effect
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 20px 40px rgba(255,152,0,0.5)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '0 15px 30px rgba(255,152,0,0.3)';
+            });
+        }
+    }, 100);
+}
+
+function removeFullScreenBlur() {
+    const overlay = document.getElementById('fullscreen-blur-overlay');
+    if (overlay) {
+        overlay.remove();
+    }
+    fullScreenWarningShown = false;
+}
+
+// Monitor full screen changes
+document.addEventListener('fullscreenchange', function() {
+    if (currentState === 'sections' || currentState === 'iframe') {
+        enforceFullScreen();
+    }
+});
+document.addEventListener('webkitfullscreenchange', function() {
+    if (currentState === 'sections' || currentState === 'iframe') {
+        enforceFullScreen();
+    }
+});
+document.addEventListener('mozfullscreenchange', function() {
+    if (currentState === 'sections' || currentState === 'iframe') {
+        enforceFullScreen();
+    }
+});
+document.addEventListener('MSFullscreenChange', function() {
+    if (currentState === 'sections' || currentState === 'iframe') {
+        enforceFullScreen();
+    }
+});
+
+// Check full screen every second when in exam mode
+function startFullScreenMonitoring() {
+    if (fullScreenCheckInterval) {
+        clearInterval(fullScreenCheckInterval);
+    }
+    
+    fullScreenCheckInterval = setInterval(() => {
+        if (currentState === 'sections' || currentState === 'iframe') {
+            enforceFullScreen();
+        }
+    }, 1000);
+}
+
+// Start monitoring
+startFullScreenMonitoring();
+
+// Override switchScreen to check full screen when switching to exam modes
+const originalSwitchScreen = switchScreen;
+switchScreen = function(fromScreen, toScreen) {
+    originalSwitchScreen(fromScreen, toScreen);
+    
+    // If switching to sections or iframe, enforce full screen
+    if (toScreen === mainInterface || toScreen === webFrame) {
+        setTimeout(enforceFullScreen, 100);
+    }
+};
+
+// Override enterFullScreen
+const originalEnterFullScreen = enterFullScreen;
+enterFullScreen = function() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen().then(() => {
+            removeFullScreenBlur();
+        }).catch(err => {
+            console.log("Fullscreen error:", err);
+        });
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen().then(() => {
+            removeFullScreenBlur();
+        }).catch(err => {
+            console.log("Fullscreen error:", err);
+        });
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen().then(() => {
+            removeFullScreenBlur();
+        }).catch(err => {
+            console.log("Fullscreen error:", err);
+        });
+    } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen().then(() => {
+            removeFullScreenBlur();
+        }).catch(err => {
+            console.log("Fullscreen error:", err);
+        });
+    }
+    isFullscreen = true;
+};
     </script>
    <!-- Copyright for ALL pages -->
 <div class="global-copyright">
