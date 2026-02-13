@@ -13,18 +13,18 @@ export async function onRequest(context) {
     try {
         const { section } = await context.request.json();
         
-        // ✅ CHANGE THIS - Use your MAIN domain with subfolders
-        const baseUrl = 'https://lfjc-exam.pages.dev';  // ← YOUR MAIN DOMAIN
+        // ✅ YOUR MAIN DOMAIN - CHANGE THIS TO YOUR ACTUAL DOMAIN
+        const baseUrl = 'https://ps3-pio.pages.dev';  // ← YOUR ACTUAL DOMAIN
         
         const urlMap = {
-            '1D': `${baseUrl}/1d/`,  // ✅ https://lfjc-exam.pages.dev/1d/
-            '1M': `${baseUrl}/1m/`,  // ✅ https://lfjc-exam.pages.dev/1m/
-            '1N': `${baseUrl}/1n/`,  // ✅ https://lfjc-exam.pages.dev/1n/
-            '1E': `${baseUrl}/1e/`,  // ✅ https://lfjc-exam.pages.dev/1e/
-            '2D': `${baseUrl}/2d/`,  // ✅ https://lfjc-exam.pages.dev/2d/
-            '2M': `${baseUrl}/2m/`,  // ✅ https://lfjc-exam.pages.dev/2m/
-            '2N': `${baseUrl}/2n/`,  // ✅ https://lfjc-exam.pages.dev/2n/
-            '2E': `${baseUrl}/2e/`,  // ✅ https://lfjc-exam.pages.dev/2e/
+            '1D': `${baseUrl}/1d/`,
+            '1M': `${baseUrl}/1m/`,
+            '1N': `${baseUrl}/1n/`,
+            '1E': `${baseUrl}/1e/`,
+            '2D': `${baseUrl}/2d/`,
+            '2M': `${baseUrl}/2m/`,
+            '2N': `${baseUrl}/2n/`,
+            '2E': `${baseUrl}/2e/`,
         };
 
         const url = urlMap[section];
