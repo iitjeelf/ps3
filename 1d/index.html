@@ -4885,48 +4885,63 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// ===== INITIAL SETUP =====
+
+  
+ // ===== INITIAL SETUP =====
 window.addEventListener('load', function() {
-  console.log('LFJC Online Exam System Initialized (75 Questions)');
-  console.log('📚 Question Structure:');
-  console.log('• Physics: Q1-20 (MCQ), Q21-25 (Numerical Input)');
-  console.log('• Chemistry: Q26-45 (MCQ), Q46-50 (Numerical Input)');
-  console.log('• Maths: Q51-70 (MCQ), Q71-75 (Numerical Input)');
-  console.log('🔒 Full-Screen Security Active');
-  console.log('📊 Tab Switching Detection: 3 switches total submit exam');
-  console.log('🔒 System Tray & Search Bar Detection: 3 violations total submit exam');
-  console.log('⚡ POWER LOSS PROTECTION: Auto-save every 15 seconds');
-  console.log('📤 GOOGLE FORMS SUBMISSION: Enabled');
-  console.log('📁 EXTERNAL ANSWER KEY: Will load from answer-key.txt');
-  console.log('🖱️ AUTO-CLICK SYSTEM: Clicks every 30 seconds to prevent screen sleep');
-  console.log('🔋 KEEP-AWAKE SYSTEM: Multiple layers to prevent screen sleep');
-  
-  document.getElementById('accessDenied').style.display = 'flex';
-  document.getElementById('studentEntry').style.display = 'none';
-  document.getElementById('examArea').style.display = 'none';
-  document.getElementById('summaryArea').style.display = 'none';
-  document.getElementById('reviewArea').style.display = 'none';
-  document.getElementById('resubmissionSection').style.display = 'none';
-  document.getElementById('googleFormsStatus').style.display = 'none';
-  document.getElementById('resumeExamSection').style.display = 'none';
-  
-  document.getElementById('accessCode').focus();
-  
-  // Initialize System Tray Security
-  systemTrayDetector = new SystemTrayViolationDetector();
-  
-  // Load answer key from external file
-  loadAnswerKey().then(success => {
-    if (success) {
-      console.log("✅ External answer key loaded successfully!");
-      showToast('✅ OK', 'success', 3000);
+    console.log('LFJC Online Exam System Initialized (75 Questions)');
+    console.log('📚 Question Structure:');
+    console.log('• Physics: Q1-20 (MCQ), Q21-25 (Numerical Input)');
+    console.log('• Chemistry: Q26-45 (MCQ), Q46-50 (Numerical Input)');
+    console.log('• Maths: Q51-70 (MCQ), Q71-75 (Numerical Input)');
+    console.log('🔒 Full-Screen Security Active');
+    console.log('📊 Tab Switching Detection: 3 switches total submit exam');
+    console.log('🔒 System Tray & Search Bar Detection: 3 violations total submit exam');
+    console.log('⚡ POWER LOSS PROTECTION: Auto-save every 15 seconds');
+    console.log('📤 GOOGLE FORMS SUBMISSION: Enabled');
+    console.log('📁 EXTERNAL ANSWER KEY: Will load from answer-key.txt');
+    console.log('🖱️ AUTO-CLICK SYSTEM: Clicks every 30 seconds to prevent screen sleep');
+    console.log('🔋 KEEP-AWAKE SYSTEM: Multiple layers to prevent screen sleep');
+    
+    document.getElementById('accessDenied').style.display = 'flex';
+    document.getElementById('studentEntry').style.display = 'none';
+    document.getElementById('examArea').style.display = 'none';
+    document.getElementById('summaryArea').style.display = 'none';
+    document.getElementById('reviewArea').style.display = 'none';
+    document.getElementById('resubmissionSection').style.display = 'none';
+    document.getElementById('googleFormsStatus').style.display = 'none';
+    document.getElementById('resumeExamSection').style.display = 'none';
+    
+    document.getElementById('accessCode').focus();
+    
+    // Initialize System Tray Security
+    systemTrayDetector = new SystemTrayViolationDetector();
+    
+    // Load answer key from external file
+    loadAnswerKey().then(success => {
+        if (success) {
+            console.log("✅ External answer key loaded successfully!");
+            showToast('✅ OK', 'success', 3000);
+        }
+    });
+    
+    // Initialize power loss protection
+    setTimeout(() => {
+        initPowerLossProtection();
+    }, 1000);
+    
+    // ✅ ✅ ✅ ADD THIS BLOCK - CHECK FOR RECOVERY FROM MAIN PAGE
+    // =============================================
+    // CHECK FOR POWER LOSS RECOVERY FROM MAIN PAGE
+    // =============================================
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('checkRecovery') === 'true') {
+        console.log('🔋 Recovery check requested from main page');
+        // Force check for saved progress after page loads
+        setTimeout(() => {
+            checkForPowerLossRecovery();
+        }, 1500);
     }
-  });
-  
-  // Initialize power loss protection
-  setTimeout(() => {
-    initPowerLossProtection();
-  }, 1000);
 });
 
 console.log("🎯 LFJC Online Exam System Loaded Successfully");
