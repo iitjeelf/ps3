@@ -708,16 +708,56 @@
         // =============================================
         // FULLSCREEN MANAGEMENT
         // =============================================
-        function enterFullScreen() {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen().catch(err => {
-                    console.log("Fullscreen error:", err);
-                });
-            }
-            isFullscreen = true;
-        }
-        
+       function enterFullScreen() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen()
+            .then(() => {
+                // SUCCESS - Remove blur overlay
+                removeFullScreenBlur();
+                console.log("Fullscreen enabled, blur removed");
+            })
+            .catch(err => {
+                console.log("Fullscreen error:", err);
+            });
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen()
+            .then(() => {
+                removeFullScreenBlur();
+                console.log("Fullscreen enabled, blur removed");
+            })
+            .catch(err => {
+                console.log("Fullscreen error:", err);
+            });
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen()
+            .then(() => {
+                removeFullScreenBlur();
+                console.log("Fullscreen enabled, blur removed");
+            })
+            .catch(err => {
+                console.log("Fullscreen error:", err);
+            });
+    } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen()
+            .then(() => {
+                removeFullScreenBlur();
+                console.log("Fullscreen enabled, blur removed");
+            })
+            .catch(err => {
+                console.log("Fullscreen error:", err);
+            });
+    }
+    isFullscreen = true;
+}
+     function removeFullScreenBlur() {
+    const overlay = document.getElementById('fullscreen-blur-overlay');
+    if (overlay) {
+        overlay.remove();
+        console.log("Blur overlay removed");
+    }
+    fullScreenWarningShown = false;
+}   
         function checkFullscreen() {
             const isCurrentlyFullscreen = !!(
                 document.fullscreenElement ||
