@@ -564,11 +564,13 @@
         });
         
         // =============================================
-        // CLOUDFLARE API AUTHENTICATION
+        // CLOUDFLARE API AUTHENTICATION - WITH YOUR WORKER URL
         // =============================================
+        const WORKER_URL = 'http://lfjcexam.iitjeelf.workers.dev/';
+        
         async function checkPasswordCloudflare(password) {
             try {
-                const response = await fetch('/api/check-password', {
+                const response = await fetch(WORKER_URL + '/api/check-password', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -714,7 +716,7 @@
                 this.style.opacity = '0.9';
                 
                 try {
-                    const response = await fetch('/api/get-section-url', {
+                    const response = await fetch(WORKER_URL + '/api/get-section-url', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
